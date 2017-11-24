@@ -5,7 +5,7 @@ import { LbComponent } from '../components/LbComp'
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
-    title: 'Links',
+    title: 'Discover',
   };
 
   render() {
