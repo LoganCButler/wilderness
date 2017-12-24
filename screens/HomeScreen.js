@@ -11,16 +11,18 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+import HomeQuickStartCard from './../components/HomeQuickStartCard'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-
+  
   render() {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <HomeQuickStartCard />
           <View style={styles.welcomeContainer}>
             <Image
               source={
