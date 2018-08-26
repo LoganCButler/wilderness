@@ -3,8 +3,18 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import firebase from 'firebase';
 import { Ionicons } from '@expo/vector-icons';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, connect } from 'react-redux';
+import axios from 'axios';
+import axiosMiddleware from 'redux-axios-middleware';
+import thunk from 'redux-thunk';
+
 import RootNavigation from './navigation/RootNavigation';
 import * as Config from './constants/Configuration';
+
+import reducer from './state/reducer.js';
+
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default class App extends React.Component {
   state = {
@@ -26,11 +36,13 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
-          <RootNavigation />
-        </View>
+        <Provider store={store}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+            <RootNavigation />
+          </View>
+        </Provider>
       );
     }
   }
